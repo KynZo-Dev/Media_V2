@@ -1,45 +1,4 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Media Chapelle Curaux{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
-{% endblock %}
-
 {% block body %}
-    <section>
-        <header>
-            <a href="#" class="logo">Médiathèque</a>
-            <div class="toggle"></div>
-            <ul class="navigation">
-            {% if is_granted('ROLE_USER') %}
-                <li><a href="#" style="--i:1;" class="active">Catalogue</a></li>
-                <li><a href="#" style="--i:2;">Réservation</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="#" style="--i:3;">Toute Réservation</a></li>
-                    <li><a href="#" style="--i:4;">Ajouter Livre</a></li>
-                    <li><a href="{{ path('app_logout') }}" style="--i:5;">Déconnexion</a></li>
-                {% else %}
-                    <li><a href="{{ path('app_logout') }}" style="--i:3;">Déconnexion</a></li>
-                {% endif %}
-            {% else %}
-                <li><a href="{{ path('app_register') }}" style="--i:1;" class="active">S'enregistrer</a></li>
-                <li><a href="{{ path('app_login') }}" style="--i:2;">Connexion</a></li>
-            {% endif %}
-            </ul>
-        </header>
-        <main>
-        </main>
-    </section>
-{% endblock %}
-
-{% block javascripts %}
-    <script>
-        const menuToggle = document.querySelector('.toggle');
-        const navigation = document.querySelector('.navigation');
-        menuToggle.onclick = function(){
-            menuToggle.classList.toggle('active')
-            navigation.classList.toggle('active')
-        }
-    </script>
 {% endblock %}

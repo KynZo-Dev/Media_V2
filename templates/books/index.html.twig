@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="books">Collection de {{ books|length }} livres</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 ms-3 me-3">
+        {% for book in books %}
+        <div class="col">
+            <div class="card h-100 shadow bg-body rounded">
+                <img class="card-img-top" src="{{ asset('/img/uploads/' ~ book.CoverImage) }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.description|u.truncate(100,'...', false)}}</p>
+                    <a href="#">bouton</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Kind</th>
+                <th>ReleaseDate</th>
+                <th>CoverImage</th>
+                <th>Available</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.description|u.truncate(100,'...', false)}}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.kind }}</td>
+                <td>{{ book.ReleaseDate ? book.ReleaseDate|date('d-m-Y') : '' }}</td>
+                <td>{{ book.CoverImage }}</td>
+                <td>{{ book.Available ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_books_show', {'id': book.id}) }}">show</a>
+                    <a href="{{ path('app_books_edit', {'id': book.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_books_new') }}">Create new</a>
+{% endblock %}

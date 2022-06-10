@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
-    background-color: #a2c7ff
+    background-color: #a2c7ff;
 }
 header
 {
@@ -93,7 +93,7 @@ header ul li a:hover
 
 /* responsive */
 
-@media (max-width: 991px)
+@media (max-width: 1015px)
 {
     header
     {
@@ -138,12 +138,14 @@ header ul li a:hover
     }
     .toggle.active
     {
+        position: fixed;
+        top: 20px;
+        right: 20px;
         background: url(close.png);
         background-size: 25px;
         background-repeat: no-repeat;
         background-position: center;
     }
 }
-
 /* annimated */
 

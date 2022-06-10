@@ -1,4 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="card shadow mx-auto" style="width: 80%;">
+        <div class="card-body text-center">
+            <h4 class="card-title">Bienvenue sur la médiathèque de la Chapelle-curreaux</h4>
+            <p class="card-text">Cette application a été conçue pour les habitants de la Chapelle-curreaux. Vous pouvez voir notre catalogue de livres et effectuer des réservations.</p>
+            {% if app.user %}
+                <a href="{{ path('app_books_index') }}" class="btn">Catalogue</a>
+            {% else %}
+                <a href="{{ path('app_register') }}" class="btn">S'enregistrer</a>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

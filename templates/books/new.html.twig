@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Books{% endblock %}
-
 {% block body %}
-    <h1>Create new Books</h1>
-
-    {{ include('books/_form.html.twig') }}
-
-    <a href="{{ path('app_books_index') }}">back to list</a>
+    <div class="card shadow mx-auto" style="width: 80%;">
+        <div class="p-3 m-0">
+            <h1 class="text-center">Ajouter un livre</h1>
+            {{ include('books/_form.html.twig', {'button_label': 'Valider'}) }}
+            <a class="btn" href="{{ path('app_books_index') }}">Catalogue</a>
+        </div>
+    </div>
 {% endblock %}

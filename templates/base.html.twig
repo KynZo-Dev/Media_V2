@@ -19,8 +19,8 @@
                 <li><a href="{{ path('app_books_index') }}" style="--i:1;">Catalogue</a></li>
                 <li><a href="#" style="--i:2;">Réservation</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="#" style="--i:3;">Toute Réservation</a></li>
-                    <li><a href="{{ path('app_books_new') }}" style="--i:4;">Ajouter Livre</a></li>
+                    <li><a href="#" style="--i:3;">Toutes les réservations</a></li>
+                    <li><a href="{{ path('app_books_new') }}" style="--i:4;">Ajouter un livre</a></li>
                     <li><a href="{{ path('app_logout') }}" style="--i:5;">Déconnexion</a></li>
                 {% else %}
                     <li><a href="{{ path('app_logout') }}" style="--i:3;">Déconnexion</a></li>
@@ -35,7 +35,7 @@
             {% block body %}
             {% endblock %}
         </main>
-        <footer class="d-flex justify-content-center align-items-center">
+        <footer class="d-flex justify-content-center align-items-center p-3">
             <div class="text-muted">&copy; Copyright {{ 'now'|date('Y') }} &middot; <a href="{{ path('app_about') }}">About US</a></div>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>

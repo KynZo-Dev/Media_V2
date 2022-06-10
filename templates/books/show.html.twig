@@ -1,48 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Books</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ book.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ book.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ book.description }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ book.author }}</td>
-            </tr>
-            <tr>
-                <th>Kind</th>
-                <td>{{ book.kind }}</td>
-            </tr>
-            <tr>
-                <th>ReleaseDate</th>
-                <td>{{ book.ReleaseDate ? book.ReleaseDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CoverImage</th>
-                <td>{{ book.CoverImage }}</td>
-            </tr>
-            <tr>
-                <th>Available</th>
-                <td>{{ book.Available ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_books_index') }}">back to list</a>
-
-    <a href="{{ path('app_books_edit', {'id': book.id}) }}">edit</a>
-
-    {{ include('books/_delete_form.html.twig') }}
+{% block body %}   
+    <div class="card shadow mx-auto" style="width: 60%;">
+        <img class="card-img-top p-2" src="{{ asset('/img/uploads/' ~ book.CoverImage) }}" alt="Image de couverture">
+        <h3 class="card-title text-center m-0">{{ book.title }}</h3>
+        <div class="card-body">
+            <label class="mt-2" for="description">Description :</label>
+            <p class="m-2" id="description">{{ book.description }}<p>
+            <label class="mt-2" for="author">Auteur :</label>
+            <p class="m-2" id="author">{{ book.author }}</p>
+            <label class="mt-2" for="kind">Genre :</label>
+            <p class="m-2" id="kind">{{ book.kind }}</p>
+            <label class="mt-2" for="RealeaseDate">Date de parution</label>
+            <p class="m-2" id="RealeaseDate">{{ book.ReleaseDate ? book.ReleaseDate|date('d-m-Y') : '' }}</p>
+            <a class="btn" href="{{ path('app_books_index') }}">Retour</a>
+            <a class="btn" href="#">Résèrver</a>
+            {% if is_granted('ROLE_EMPLOY') %}
+                <a class="btn" href="{{ path('app_books_edit', {'id': book.id}) }}">Modifier</a>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ include('books/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

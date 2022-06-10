@@ -8,9 +8,9 @@
                 <div class="card h-100 shadow bg-body rounded">
                     <a class="imglien" href="{{ path('app_books_show', {'id': book.id}) }}"><img class="card-img-top p-2" src="{{ asset('/img/uploads/' ~ book.CoverImage) }}" alt="Image de couverture"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ book.title }}</h5>
-                        <p class="card-text">{{ book.description|u.truncate(100,'...', false)}}</p>
-                        {% if is_granted('ROLE_ADMIN') %}
+                        <a class="imglien" href="{{ path('app_books_show', {'id': book.id}) }}"><h5 class="card-title">{{ book.title }}</h5></a>
+                        <a class="imglien" href="{{ path('app_books_show', {'id': book.id}) }}"><p class="card-text">{{ book.description|u.truncate(100,'...', false)}}</p></a>
+                        {% if is_granted('ROLE_EMPLOY') %}
                             <a class="btn" href="{{ path('app_books_edit', {'id': book.id}) }}">Modifier</a>
                         {% endif %}
                     </div>

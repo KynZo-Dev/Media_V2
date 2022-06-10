@@ -16,6 +16,7 @@ class BooksController extends AbstractController
     #[Route('/', name: 'app_books_index', methods: ['GET'])]
     public function index(BooksRepository $booksRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('books/index.html.twig', [
             'books' => $booksRepository->findAll(),
         ]);
@@ -24,6 +25,7 @@ class BooksController extends AbstractController
     #[Route('/new', name: 'app_books_new', methods: ['GET', 'POST'])]
     public function new(Request $request, BooksRepository $booksRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_EMPLOY');
         $book = new Books();
         $form = $this->createForm(BooksType::class, $book);
         $form->handleRequest($request);
@@ -50,6 +52,7 @@ class BooksController extends AbstractController
     #[Route('/{id}', name: 'app_books_show', methods: ['GET'])]
     public function show(Books $book): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('books/show.html.twig', [
             'book' => $book,
         ]);
@@ -58,6 +61,7 @@ class BooksController extends AbstractController
     #[Route('/{id}/edit', name: 'app_books_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Books $book, BooksRepository $booksRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_EMPLOY');
         $form = $this->createForm(BooksType::class, $book);
         $form->handleRequest($request);
 
@@ -87,6 +91,7 @@ class BooksController extends AbstractController
     #[Route('/{id}', name: 'app_books_delete', methods: ['POST'])]
     public function delete(Request $request, Books $book, BooksRepository $booksRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) {
             $nom = $book->getCoverImage();
             unlink($this->getParameter('images_directory').'/'.$nom);

@@ -39,6 +39,10 @@ header .logo
         opacity: 1;
     }
 }
+header .logo:hover
+{
+    color: #00183d;
+}
 header ul
 {
     display: flex;
@@ -90,7 +94,17 @@ header ul li a:hover
     align-items: center;
     text-decoration: none;
 }
-
+.imglien
+{
+    display: inline-block;
+    color: #00183d;
+    text-decoration: none;
+    user-select: none;
+}
+.imglien:hover
+{
+    color: #00183d;
+}
 /* responsive */
 
 @media (max-width: 1015px)

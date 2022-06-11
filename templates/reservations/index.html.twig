@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationsController!{% endblock %}
+{% block title %}Reservations index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Reservations index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ReservationsAt</th>
+                <th>ReservationsMaxAt</th>
+                <th>ReservationsLongAt</th>
+                <th>ReservationsLongMaxAt</th>
+                <th>ReservationsRemove</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.ReservationsAt ? reservation.ReservationsAt|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.ReservationsMaxAt ? reservation.ReservationsMaxAt|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.ReservationsLongAt ? reservation.ReservationsLongAt|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.ReservationsLongMaxAt ? reservation.ReservationsLongMaxAt|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.ReservationsRemove ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_reservations_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('app_reservations_edit', {'id': reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/apps/Media_V2/src/Controller/ReservationsController.php'|file_link(0) }}">src/Controller/ReservationsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/apps/Media_V2/templates/reservations/index.html.twig'|file_link(0) }}">templates/reservations/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_reservations_new') }}">Create new</a>
 {% endblock %}

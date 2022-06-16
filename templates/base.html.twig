@@ -19,7 +19,7 @@
                 <li><a href="{{ path('app_books_index') }}" style="--i:1;">Catalogue</a></li>
                 <li><a href="#" style="--i:2;">Réservation</a></li>
                 {% if is_granted('ROLE_EMPLOY') %}
-                    <li><a href="#" style="--i:3;">Toutes les réservations</a></li>
+                    <li><a href="{{ path('app_reservations_index') }}" style="--i:3;">Toutes les réservations</a></li>
                     <li><a href="{{ path('app_books_new') }}" style="--i:4;">Ajouter un livre</a></li>
                     <li><a href="{{ path('app_logout') }}" style="--i:5;">Déconnexion</a></li>
                 {% else %}

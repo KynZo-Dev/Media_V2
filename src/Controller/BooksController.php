@@ -5,6 +5,10 @@ namespace App\Controller;
 use App\Entity\Books;
 use App\Form\BooksType;
 use App\Repository\BooksRepository;
+use App\Entity\Reservations;
+use App\Repository\ReservationsRepository;
+use DateInterval;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +60,24 @@ class BooksController extends AbstractController
         return $this->render('books/show.html.twig', [
             'book' => $book,
         ]);
+    }
+
+    #[Route('/{id}/resa', name: 'app_books_resa', methods: ['GET', 'POST'])]
+    public function resa(Books $book, BooksRepository $booksRepository, ReservationsRepository $reservationsRepository): Response
+    {
+        $reservation = new Reservations();
+        $resaat = new DateTime('now');
+        $resamaxat = new DateTime('now');
+        $resamaxat = $resamaxat->add(new DateInterval('P3D'));
+        $reservation->setReservationsAt($resaat);
+        $reservation->setReservationsMaxAt($resamaxat);
+        $reservation->setUser($this->getUser());
+        $reservation->setBooks($book);
+        $reservation->setRemove(false);
+        $book->setAvailable(false);
+        $booksRepository->add($book, true);
+        $reservationsRepository->add($reservation, true);
+        return $this->redirectToRoute('app_reservations_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/edit', name: 'app_books_edit', methods: ['GET', 'POST'])]

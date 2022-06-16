@@ -14,7 +14,9 @@
             <label class="mt-2" for="RealeaseDate">Date de parution</label>
             <p class="m-2" id="RealeaseDate">{{ book.ReleaseDate ? book.ReleaseDate|date('d-m-Y') : '' }}</p>
             <a class="btn" href="{{ path('app_books_index') }}">Retour</a>
-            <a class="btn" href="#">Résèrver</a>
+            {% if book.Available == 1 %}
+                <a class="btn" href="{{ path('app_books_resa', {'id': book.id}) }}">Résèrver</a>
+            {% endif %}
             {% if is_granted('ROLE_EMPLOY') %}
                 <a class="btn" href="{{ path('app_books_edit', {'id': book.id}) }}">Modifier</a>
             {% endif %}

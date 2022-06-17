@@ -3,41 +3,47 @@
 {% block title %}Reservations index{% endblock %}
 
 {% block body %}
-    <h1>Reservations index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Useremail</th>
-                <th>book title</th>
-                <th>ReservationsAt</th>
-                <th>ReservationsMaxAt</th>
-                <th>ReservationsLongAt</th>
-                <th>ReservationsLongMaxAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.id }}</td>
-                <td>{{ reservation.user.email }}</td>
-                <td>{{ reservation.books.title }}</td>
-                <td>{{ reservation.ReservationsAt ? reservation.ReservationsAt|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.ReservationsMaxAt ? reservation.ReservationsMaxAt|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.ReservationsLongAt ? reservation.ReservationsLongAt|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.ReservationsLongMaxAt ? reservation.ReservationsLongMaxAt|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_reservations_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservations_edit', {'id': reservation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <h3 class="text-center">Reservations index</h3>
+    <div class="table-responsive m-0 p-3">
+        <table class="table align-middle table-striped table-hover">
+            <thead class="table table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Useremail</th>
+                    <th>book title</th>
+                    <th>ReservationsAt</th>
+                    <th>ReservationsMaxAt</th>
+                    <th>ReservationsLongAt</th>
+                    <th>ReservationsLongMaxAt</th>
+                    <th>Remove</th>
+                    {% if is_granted('ROLE_EMPLOY') %}
+                        <th>actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.id }}</td>
+                    <td>{{ reservation.user.email }}</td>
+                    <td>{{ reservation.books.title }}</td>
+                    <td>{{ reservation.ReservationsAt ? reservation.ReservationsAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ reservation.ReservationsMaxAt ? reservation.ReservationsMaxAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ reservation.ReservationsLongAt ? reservation.ReservationsLongAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ reservation.ReservationsLongMaxAt ? reservation.ReservationsLongMaxAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ reservation.Remove }}</td>
+                    {% if is_granted('ROLE_EMPLOY') %}
+                        <td>
+                            <a class="btn" href="{{ path('app_reservations_edit', {'id': reservation.id}) }}">edit</a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

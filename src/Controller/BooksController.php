@@ -65,6 +65,7 @@ class BooksController extends AbstractController
     #[Route('/{id}/resa', name: 'app_books_resa', methods: ['GET', 'POST'])]
     public function resa(Books $book, BooksRepository $booksRepository, ReservationsRepository $reservationsRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $reservation = new Reservations();
         $resaat = new DateTime('now');
         $resamaxat = new DateTime('now');
@@ -77,7 +78,7 @@ class BooksController extends AbstractController
         $book->setAvailable(false);
         $booksRepository->add($book, true);
         $reservationsRepository->add($reservation, true);
-        return $this->redirectToRoute('app_reservations_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_books_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/edit', name: 'app_books_edit', methods: ['GET', 'POST'])]

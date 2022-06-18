@@ -1,30 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservations index{% endblock %}
-
 {% block body %}
-    <h3 class="text-center">Reservations index</h3>
+    <h3 class="text-center">Tableau des réservations</h3>
     <div class="table-responsive m-0 p-3">
         <table class="table align-middle table-striped table-hover">
             <thead class="table table-dark">
                 <tr>
-                    <th>Id</th>
-                    <th>Useremail</th>
-                    <th>book title</th>
-                    <th>ReservationsAt</th>
-                    <th>ReservationsMaxAt</th>
-                    <th>ReservationsLongAt</th>
-                    <th>ReservationsLongMaxAt</th>
-                    <th>Remove</th>
+                    <th>Email de l'utilisateur</th>
+                    <th>Titre du Livre</th>
+                    <th>Date de réservations</th>
+                    <th>Date Max de réservations</th>
+                    <th>Date de retrait</th>
+                    <th>Date max de retour</th>
+                    <th>Retrait</th>
                     {% if is_granted('ROLE_EMPLOY') %}
-                        <th>actions</th>
+                        <th>Actions</th>
                     {% endif %}
                 </tr>
             </thead>
             <tbody>
             {% for reservation in reservations %}
                 <tr>
-                    <td>{{ reservation.id }}</td>
                     <td>{{ reservation.user.email }}</td>
                     <td>{{ reservation.books.title }}</td>
                     <td>{{ reservation.ReservationsAt ? reservation.ReservationsAt|date('Y-m-d') : '' }}</td>
@@ -40,7 +36,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">no records found</td>
+                    <td colspan="6">Pas de réservations</td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -20,7 +20,7 @@ class BooksType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre'
             ])
-            ->add('description', TextareaType ::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description'
             ])
             ->add('author', TextType::class, [
@@ -36,7 +36,7 @@ class BooksType extends AbstractType
             ])
             ->add('CoverImage', FileType::class, [
                 'label' => 'Image de couverture',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('Available', CheckboxType::class, [
                 'label' => 'Disponible'

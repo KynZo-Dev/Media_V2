@@ -18,25 +18,31 @@ class BooksType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => 'Titre',
+                'required' => 'true'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description'
+                'label' => 'Description',
+                'required' => 'true'
             ])
             ->add('author', TextType::class, [
-                'label' => 'Auteur'
+                'label' => 'Auteur',
+                'required' => 'true'
             ])
             ->add('kind', TextType::class, [
-                'label' => 'Genre'
+                'label' => 'Genre',
+                'required' => 'true'
             ])
             ->add('ReleaseDate', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
-                'label' => 'Date de parution'
+                'label' => 'Date de parution',
+                'required' => 'true'
             ])
             ->add('CoverImage', FileType::class, [
                 'label' => 'Image de couverture',
-                'mapped' => false
+                'mapped' => false,
+                'required' => 'true'
             ])
             ->add('Available', CheckboxType::class, [
                 'label' => 'Disponible'

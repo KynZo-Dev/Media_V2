@@ -23,7 +23,8 @@ class ReservationsType extends AbstractType
             ->add('ReservationsMaxAt', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
-                'label' => 'Date Max de réservations'
+                'label' => 'Date Max de réservations',
+                'required' => 'true'
             ])
             ->add('ReservationsLongAt', DateType::class, [
                 'widget' => 'single_text',
@@ -36,7 +37,8 @@ class ReservationsType extends AbstractType
                 'label' => 'Date max de retour'
             ])
             ->add('Remove', CheckboxType::class, [
-                'label' => 'retrait'
+                'label' => 'retrait',
+                'required' => 'true'
             ])
             
         ;

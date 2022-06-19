@@ -23,24 +23,30 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('LastName', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'required' => 'true'
             ])
             ->add('FirstName', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'required' => 'true'
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email'
+                'label' => 'Email',
+                'required' => 'true'
             ])
             ->add('Address', TextType::class, [
-                'label' => 'Adresse'
+                'label' => 'Adresse',
+                'required' => 'true'
             ])
             ->add('PostalCode', NumberType::class, [
-                'label' => 'Code Postal'
+                'label' => 'Code Postal',
+                'required' => 'true'
             ])
             ->add('BirthDay', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
-                'label' => 'Anniversaire'
+                'label' => 'Anniversaire',
+                'required' => 'true'
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'Accepter conditions général',
@@ -50,6 +56,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter nos conditions général.',
                     ]),
                 ],
+                'required' => 'true',
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -57,6 +64,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
+                'required' => 'true',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Enter un mot de passe valide',

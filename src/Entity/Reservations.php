@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReservationsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationsRepository::class)]
 class Reservations
@@ -14,9 +15,13 @@ class Reservations
     private $id;
 
     #[ORM\Column(type: 'date')]
+    #[Assert\NotBlank()]
+    #[Assert\Date()]
     private $ReservationsAt;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: 'date')]
+    #[Assert\NotBlank()]
+    #[Assert\Date()]
     private $ReservationsMaxAt;
 
     #[ORM\Column(type: 'date', nullable: true)]
@@ -27,10 +32,12 @@ class Reservations
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank()]
     private $user;
 
     #[ORM\ManyToOne(targetEntity: Books::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank()]
     private $books;
 
     #[ORM\Column(type: 'boolean')]

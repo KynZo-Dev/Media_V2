@@ -31,6 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank()]
     #[Assert\Length(min:6)]
+    #[Assert\Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{6,15})$")]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]

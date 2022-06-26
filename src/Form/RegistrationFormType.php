@@ -24,11 +24,33 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('LastName', TextType::class, [
                 'label' => 'Nom',
-                'required' => 'true'
+                'required' => 'true',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Enter un Nom valide',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre Nom doit comporter au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ],
             ])
             ->add('FirstName', TextType::class, [
                 'label' => 'Prénom',
-                'required' => 'true'
+                'required' => 'true',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Enter un Prénom valide',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre Prénom doit comporter au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',

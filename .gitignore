@@ -9,6 +9,10 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+###> KynZo ###
+/public/img/uploads/
+###< KynZo ###
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
